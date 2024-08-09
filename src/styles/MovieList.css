@@ -44,4 +44,8 @@
         transform: none;
         box-shadow: none;
     }
+
+    .movie-item img {
+        height: 350px;
+    }
 }
