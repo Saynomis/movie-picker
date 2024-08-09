@@ -31,11 +31,6 @@ html, body {
   background: none; 
 }
 
-/* body {
-  position: relative;
-  background: none; 
-} */
-
 body::before {
   content: "";
   position: fixed; /* Cover the entire viewport */
@@ -48,6 +43,9 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed; /* Ensure it stays fixed during scrolling */
+  background-origin: border-box; /* Adjust how the background is positioned */
+  background-clip: padding-box; /* Ensure the background is clipped to the padding box */
   filter: blur(3px); /* Apply blur to the background image */
   z-index: -1; /* Ensure the pseudo-element is behind all content */
   padding-top: env(safe-area-inset-top); /* Respect the safe area insets */
@@ -55,5 +53,6 @@ body::before {
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
 }
+
 
 
