@@ -1,0 +1,16 @@
+.header-container {
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    gap: 3rem;
+}
+
+.logo img{
+    width: 100px;
+}
+
+.title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}

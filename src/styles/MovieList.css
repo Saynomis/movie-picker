@@ -1,0 +1,31 @@
+.movie-list-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    overflow-x: auto;
+    margin: 0px 20px;
+    padding: 30px;
+    gap: 2rem;
+    scroll-behavior: smooth; /* Smooth horizontal scrolling */
+    flex-grow: 1;
+}
+
+.movie-item {
+    display: flex;
+    width: fit-content;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transform and box-shadow transition */
+    padding: 5px; /* Add padding inside each item */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #fff; /* Background color for movie items */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+.movie-item img {
+    border-radius: 4px; /* Round the corners of the image */
+    /* width: 100%; */
+}
+
+.movie-item:hover {
+    transform: scale(1.2); /* Scale the movie item on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevate the shadow on hover */
+}
