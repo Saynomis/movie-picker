@@ -41,6 +41,7 @@ body {
 
 body::before {
   content: "";
+  display: flex;
   flex: 1;
   position: absolute;
   top: 0;
