@@ -38,3 +38,10 @@
         height: 300px;
     }
 }
+
+@media (max-width: 900px) {
+    .movie-item:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
