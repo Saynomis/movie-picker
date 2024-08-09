@@ -33,7 +33,6 @@ function App() {
     );
     const data = await response.json();
     setSelectedMovie(data || null);
-    console.log(data);
   };
 
   // Effect to fetch movies when the search value changes
