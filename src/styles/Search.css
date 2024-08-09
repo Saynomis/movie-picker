@@ -40,3 +40,9 @@
 .search-container input::placeholder {
     color: white;
 }
+
+@media (max-width: 900px) {
+    .search-container {
+        margin: 30px;
+    }
+}

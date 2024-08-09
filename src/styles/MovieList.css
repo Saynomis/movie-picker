@@ -22,10 +22,19 @@
 
 .movie-item img {
     border-radius: 4px; /* Round the corners of the image */
-    /* width: 100%; */
 }
 
 .movie-item:hover {
     transform: scale(1.2); /* Scale the movie item on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevate the shadow on hover */
+}
+
+@media (max-width: 375px) {
+    .movie-item{
+        padding: 5px;
+    }
+
+    .movie-item img {
+        height: 300px;
+    }
 }

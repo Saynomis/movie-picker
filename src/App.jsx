@@ -1,54 +1,69 @@
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
-import Search from "./components/search";
+import Search from "./components/Search";
 import MovieList from "./components/MovieList";
 import Footer from "./components/Footer";
-import MovieDetails from "./components/MovieDetail";
-import Popup from "reactjs-popup";
-import { useEffect, useState } from "react";
+import MovieDetails from "./components/MovieDetails";
 import "./styles/App.css";
-
-// vytvorit novy state query do ktoreho posunieme novy 
-// fetch request a potom ho volame v novom componente movieDetails
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState([]);
-  const [isOpen, setIsOpen] =useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false); 
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchValue, setSearchValue] = useState("");
 
+  const openPopup = () => setIsPopupOpen(true);
+  const closePopup = () => setIsPopupOpen(false);
+
+  // Fetch movies based on the search value
   const fetchMovies = async () => {
-    const url = ` http://www.omdbapi.com/?s=${searchValue}&apikey=5348d00c`;
+    if (!searchValue) return;
 
-    const response = await fetch(url);
-    const responseJson = await response.json();
-
-    if (responseJson.Search) {
-      setMovies(responseJson.Search);
-    } else {
-      setMovies([]);
-    } 
+    const response = await fetch(
+      `http://www.omdbapi.com/?s=${searchValue}&apikey=5348d00c`
+    );
+    const data = await response.json();
+    setMovies(data.Search || []);
   };
 
+  // Fetch details of the selected movie
+  const fetchMovieDetails = async (imdbID) => {
+    const response = await fetch(
+      `http://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=5348d00c`
+    );
+    const data = await response.json();
+    setSelectedMovie(data || null);
+    console.log(data);
+  };
 
+  // Effect to fetch movies when the search value changes
   useEffect(() => {
-    fetchMovies(searchValue);
+    fetchMovies();
   }, [searchValue]);
 
-  const handleClick = (movie) => {
-    console.log(movie.imdbID);
-    setIsOpen(!isOpen)
+  // Handle movie selection
+  const handleMovieSelect = (movie) => {
+    fetchMovieDetails(movie.imdbID);
+    openPopup()
   };
 
   return (
-    <>
-      <div className="container">
-        <Header />
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
-        <MovieList movies={movies} handleClick={handleClick} />
-        {/* {isOpen && (<MovieDetails title={} poster={} plot={}/>)} */}
-        <Footer />
-      </div>
-    </>
+    <div className="container">
+      <Header />
+      <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+      <MovieList movies={movies} onMovieSelect={handleMovieSelect} />
+      {isPopupOpen && selectedMovie && (
+        <MovieDetails
+          title={selectedMovie.Title}
+          poster={selectedMovie.Poster}
+          plot={selectedMovie.Plot}
+          year={selectedMovie.Year}
+          rating={selectedMovie.imdbRating}
+          onClose={closePopup}  
+        />
+      )}
+      <Footer />
+    </div>
   );
 }
 
