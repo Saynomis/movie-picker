@@ -8,13 +8,9 @@
   font-family: "Gupter", serif;
   line-height: 1.5;
   font-weight: 400;
-  margin: 0;
-  padding: 0;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #070f2b;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -26,8 +22,7 @@
   max-width: 100%;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -35,24 +30,22 @@ body {
 
 body {
   position: relative;
-  background: none; 
-  flex: 1;/* Remove background from the body itself */
+  background: none; /* Remove background from the body itself */
 }
 
 body::before {
   content: "";
-  display: flex;
-  flex: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/public/movie-collage-poster.jpg");
+  position: fixed; /* Use fixed position to cover the entire viewport */
+  top: calc(env(safe-area-inset-top) * -1); /* Ensure the background covers the top safe area */
+  left: calc(env(safe-area-inset-left) * -1); /* Ensure the background covers the left safe area */
+  right: calc(env(safe-area-inset-right) * -1); /* Ensure the background covers the right safe area */
+  bottom: calc(env(safe-area-inset-bottom) * -1); /* Ensure the background covers the bottom safe area */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                    url("/public/movie-collage-poster.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   filter: blur(3px); /* Apply blur to the background image */
   z-index: -1; /* Ensure the pseudo-element is behind all content */
 }
+
