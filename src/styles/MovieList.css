@@ -22,6 +22,7 @@
 
 .movie-item img {
     border-radius: 4px; /* Round the corners of the image */
+    cursor: pointer;
 }
 
 .movie-item:hover {

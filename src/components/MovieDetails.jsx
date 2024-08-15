@@ -3,14 +3,18 @@ import { FaRegHeart } from "react-icons/fa";
 import "../styles/MovieDetails.css";
 
 export default function movieDetails({
+  id,
   title,
   poster,
   plot,
   onClose,
   year,
   rating,
-  addFavorite
+  addFavorite,
+  favorites
 }) {
+const isFavorite = favorites.some((favorite) => favorite.id === id);
+
   return (
     <>
       <div className="overlay" onClick={onClose}></div>
@@ -24,7 +28,10 @@ export default function movieDetails({
           <h2>IMDB: {rating}/10</h2>
         </div>
         <div className="btn-container">
-          <button onClick={addFavorite}>
+          <button
+            className={isFavorite ? "heart-red" : ''}
+            onClick={() => addFavorite(id, poster)}
+          >
             <FaRegHeart />
           </button>
           <button onClick={onClose}>
